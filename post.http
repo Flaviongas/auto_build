@@ -1,0 +1,9 @@
+POST http://localhost:5555/wb
+Content-Type: application/json
+
+{
+"event": "user_registered",
+"user_id": 1,
+"name": "John Doe"
+}
+

@@ -8,7 +8,7 @@ const port = 5555;
 
 app.use(bodyParser.json());
 
-app.post('/webhook', (req, res) => {
+app.post('/wb', (req, res) => {
 
 	console.log('Received webhook request:', req.body);
 
