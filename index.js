@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 app.post('/wb', (req, res) => {
 
 	console.log('Received webhook request:', req.body);
+	console.log('Req', req);
 
 	res.status(200).send('Webhook received!');
 
