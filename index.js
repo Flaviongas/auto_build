@@ -2,19 +2,23 @@ const express = require('express');
 const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 
-//import './script.mjs';
-
 const app = express();
 const port = 5555;
 
 app.use(bodyParser.json());
 
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.post('/wb', (req, res) => {
 	console.log('Received webhook request:', req.body);
 	console.log('req: ', req);
-	if (req.body.head_commit.message) {
 
-		console.log('Commit:', req.body.head_commit.message);
+
+	const commitMessage = req.body.head_commit ? req.body.head_commit.message : null;
+
+	if (commitMessage) {
+		console.log('Commit:', commitMessage);
 	}
 
 	exec('node script.mjs', (error, stdout, stderr) => {
@@ -31,4 +35,3 @@ app.post('/wb', (req, res) => {
 app.listen(port, () => {
 	console.log(`Server is running on port ${port}`);
 });
-
