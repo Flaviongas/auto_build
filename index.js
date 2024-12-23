@@ -11,7 +11,10 @@ app.use(bodyParser.json());
 
 app.post('/wb', (req, res) => {
 	console.log('Received webhook request:', req.body);
-	console.log('Commit:', req.body.head_commit.message);
+	if (req.body.head_commit.message) {
+
+		console.log('Commit:', req.body.head_commit.message);
+	}
 
 	exec('node script.mjs', (error, stdout, stderr) => {
 		if (error) {
