@@ -21,7 +21,7 @@ app.post('/wb', (req, res) => {
 		console.log('Commit:', commitMessage);
 	}
 
-	exec('git config --global --add safe.directory /var/www/example.org/tudeli', (error, stdout, stderr) => {
+	exec('git config --global --add safe.directory /home/opal/tudeli_back', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return res.status(500).send('Error executing script');
@@ -30,7 +30,7 @@ app.post('/wb', (req, res) => {
 		console.error(`stderr: ${stderr}`);
 	});
 
-	exec('git -C /var/www/example.org/tudeli reset --hard', (error, stdout, stderr) => {
+	exec('git -C /home/opal/tudeli_back reset --hard', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return res.status(500).send('Error executing script');
@@ -41,7 +41,7 @@ app.post('/wb', (req, res) => {
 
 	console.log('ABOUT TO PULL')
 
-	exec('git -C /var/www/example.org/tudeli pull', (error, stdout, stderr) => {
+	exec('git -C /home/opal/tudeli_back pull', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return res.status(500).send('Error executing script');
@@ -49,15 +49,15 @@ app.post('/wb', (req, res) => {
 		console.log(`stdout: ${stdout}`);
 		console.error(`stderr: ${stderr}`);
 	});
-	exec('npm run build', { cwd: '/var/www/example.org/tudeli', shell: '/run/current-system/sw/bin/bash' }, (error, stdout, stderr) => {
-    if (error) {
-        console.error(`exec error: ${error}`);
-        return res.status(500).send('Error executing script');
-    }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
-    res.status(200).send('Webhook received and script executed!');
-});
+	exec('sudo systemctl restart django', { cwd: '/home/opal/tudeli_back', shell: '/usr/bin/bash' }, (error, stdout, stderr) => {
+		if (error) {
+			console.error(`exec error: ${error}`);
+			return res.status(500).send('Error executing script');
+		}
+		console.log(`stdout: ${stdout}`);
+		console.error(`stderr: ${stderr}`);
+		res.status(200).send('Webhook received and script executed!');
+	});
 
 
 });
