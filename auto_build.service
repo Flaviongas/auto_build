@@ -1,0 +1,12 @@
+[Unit]
+Description=TuDeli Backend Auto Builder
+After=network.target
+
+[Service]
+User=root
+Restart=always
+WorkingDirectory=/home/opal/tudeli_back
+ExecStart= /usr/bin/node /home/opal/auto_build/index.js
+
+[Install]
+WantedBy=multi-user.target

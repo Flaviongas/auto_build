@@ -49,6 +49,7 @@ app.post('/wb', (req, res) => {
 		console.log(`stdout: ${stdout}`);
 		console.error(`stderr: ${stderr}`);
 	});
+	console.log('RESTARTING SYSTEM')
 	exec('sudo systemctl restart django', { cwd: '/home/opal/tudeli_back', shell: '/usr/bin/bash' }, (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
