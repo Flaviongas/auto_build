@@ -49,7 +49,7 @@ app.post('/wb', (req, res) => {
 		console.log(`stdout: ${stdout}`);
 		console.error(`stderr: ${stderr}`);
 	});
-	exec('npm run --prefix /var/www/example.org/tudeli build', (error, stdout, stderr) => {
+	exec('npm run build --prefix /var/www/example.org/tudeli ', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return res.status(500).send('Error executing script');
