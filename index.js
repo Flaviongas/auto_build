@@ -1,7 +1,7 @@
 const express = require('express');
 const { exec } = require('child_process');
 const bodyParser = require('body-parser');
-const chalk = require('chalk');  // Import chalk for colored output
+const chalk = await import('chalk');  // Import chalk for colored output
 
 const app = express();
 const port = 6666;
