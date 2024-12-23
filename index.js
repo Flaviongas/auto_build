@@ -47,17 +47,19 @@ app.post('/wb', (req, res) => {
 		console.log(chalk.cyan(`stdout: ${stdout}`));
 		console.error(chalk.yellow(`stderr: ${stderr}`));
 	});
+	setTimeout(() => {
+		console.log(chalk.magenta('RESTARTING SYSTEM'));  // Magenta for restart stage
+		exec('sudo systemctl restart django', { cwd: '/home/opal/tudeli_back', shell: '/usr/bin/bash' }, (error, stdout, stderr) => {
+			if (error) {
+				console.error(chalk.red(`exec error: ${error}`));
+				return res.status(500).send('Error executing script');
+			}
+			console.log(chalk.cyan(`stdout: ${stdout}`));
+			console.error(chalk.yellow(`stderr: ${stderr}`));
+			res.status(200).send('Webhook received and script executed!');
+		});
+	}, 10000)
 
-	console.log(chalk.magenta('RESTARTING SYSTEM'));  // Magenta for restart stage
-	exec('sudo systemctl restart django', { cwd: '/home/opal/tudeli_back', shell: '/usr/bin/bash' }, (error, stdout, stderr) => {
-		if (error) {
-			console.error(chalk.red(`exec error: ${error}`));
-			return res.status(500).send('Error executing script');
-		}
-		console.log(chalk.cyan(`stdout: ${stdout}`));
-		console.error(chalk.yellow(`stderr: ${stderr}`));
-		res.status(200).send('Webhook received and script executed!');
-	});
 });
 
 app.listen(port, () => {
