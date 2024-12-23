@@ -1,4 +1,4 @@
-POST https://gidua.xyz/wb
+POST https://autoback.gidua.xyz/wb
 Content-Type: application/json
 
 {
