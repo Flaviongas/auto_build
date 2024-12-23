@@ -21,7 +21,7 @@ app.post('/wb', (req, res) => {
 		console.log('Commit:', commitMessage);
 	}
 
-	exec('node /var/www/example.org/auto_build/script.mjs', (error, stdout, stderr) => {
+	exec('node script.mjs', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return res.status(500).send('Error executing script');
