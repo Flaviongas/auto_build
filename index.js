@@ -49,6 +49,24 @@ app.post('/wb', (req, res) => {
 		console.log(`stdout: ${stdout}`);
 		console.error(`stderr: ${stderr}`);
 	});
+	exec('which npm', { cwd: '/var/www/example.org/tudeli' }, (error, stdout, stderr) => {
+		if (error) {
+			console.error(`exec error: ${error}`);
+			return res.status(500).send('Error executing script');
+		}
+		console.log(`npm path: ${stdout}`);
+	});
+	exec('npm run build', { cwd: '/var/www/example.org/tudeli' }, (error, stdout, stderr) => {
+		if (error) {
+			console.error(`exec error: ${error}`);
+			return res.status(500).send('Error executing script');
+		}
+		console.log(`stdout: ${stdout}`);
+		console.error(`stderr: ${stderr}`);
+		res.status(200).send('Webhook received and script executed!');
+	});
+
+
 	exec('npm run build --prefix /var/www/example.org/tudeli ', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
