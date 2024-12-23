@@ -1,7 +1,8 @@
-const express = require('express');
-const { exec } = require('child_process');
-const bodyParser = require('body-parser');
-const chalk = await import('chalk');  // Import chalk for colored output
+import express from 'express';  // Use `import` instead of `require`
+import { exec } from 'child_process';  // Destructuring import from `child_process`
+import bodyParser from 'body-parser';  // Import bodyParser as default
+
+import chalk from 'chalk';
 
 const app = express();
 const port = 6666;
