@@ -63,7 +63,6 @@ app.post('/wb', (req, res) => {
 		}
 		console.log(`stdout: ${stdout}`);
 		console.error(`stderr: ${stderr}`);
-		res.status(200).send('Webhook received and script executed!');
 	});
 
 
