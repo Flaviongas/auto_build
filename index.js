@@ -53,7 +53,7 @@ app.post('/wb', (req, res) => {
 
 	setTimeout(() => {
 
-		exec('npm run build', { cwd: '/var/www/example.org/tudeli', shell: '/run/current-system/sw/bin/bash' }, (error, stdout, stderr) => {
+		exec('npm run build', { cwd: '/var/www/example.org/tudeli', shell: '/nix/store/4006pcsz94vkxsfv6hqmb36dqd6j6r8x-system-path/bin/bash' }, (error, stdout, stderr) => {
 			if (error) {
 				console.error(`exec error: ${error}`);
 				return res.status(500).send('Error executing script');
