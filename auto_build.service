@@ -1,0 +1,17 @@
+[Unit]
+After=network-online.target systemd-resolved.service
+
+[Service]
+Environment="LOCALE_ARCHIVE=/nix/store/m3wqdrs72mri74f7qw95z50f94fv9acp-glibc-locales-2.40-36/lib/locale/locale-archive"
+Environment="PATH=/nix/store/wsb9v0f85w29qic8flwwj39x59xxhxrb-coreutils-9.5/bin:/nix/store/vqv3dblqx76k185jg4ym5i3dz196lv19-nodejs-20.18.1/bin:/nix/store/vqv3dblqx76k185jg4ym5i3dz196lv19-nodejs-20.18.1/bin:/nix/store/b7gflndpvkbmyf1qr5s88mbqzwgi1p8f-zx-8.2.2/bin:/nix/store/4ahzcjrsrv96qbcpmm4ybqkdjcbgblvc-git-2.47.0/bin:/nix/store/z8jmjg32hz3mnk8972pwxhmrk66l7iw1-openssh-9.9p1/bin:/nix/store/wsb9v0f85w29qic8flwwj39x59xxhxrb-coreutils-9.5/bin:/nix/store/jxnfxgsrcrrl15g4hyik2dgj839ykhbl-findutils-4.10.0/bin:/nix/store/drhlsmsdhd1lgrj4d887z9yaqlagv1gr-gnugrep-3.11/bin:/nix/store/16wi00s9a1y0mhap87gmvrs5d3mclx9h-gnused-4.9/bin:/nix/store/24wz75q6mr0q7p2vnm9mhpgdr5l3y2k0-systemd-256.8/bin:/nix/store/wsb9v0f85w29qic8flwwj39x59xxhxrb-coreutils-9.5/sbin:/nix/store/vqv3dblqx76k185jg4ym5i3dz196lv19-nodejs-20.18.1/sbin:/nix/store/vqv3dblqx76k185jg4ym5i3dz196lv19-nodejs-20.18.1/sbin:/nix/store/b7gflndpvkbmyf1qr5s88mbqzwgi1p8f-zx-8.2.2/sbin:/nix/store/4ahzcjrsrv96qbcpmm4ybqkdjcbgblvc-git-2.47.0/sbin:/nix/store/z8jmjg32hz3mnk8972pwxhmrk66l7iw1-openssh-9.9p1/sbin:/nix/store/wsb9v0f85w29qic8flwwj39x59xxhxrb-coreutils-9.5/sbin:/nix/store/jxnfxgsrcrrl15g4hyik2dgj839ykhbl-findutils-4.10.0/sbin:/nix/store/drhlsmsdhd1lgrj4d887z9yaqlagv1gr-gnugrep-3.11/sbin:/nix/store/16wi00s9a1y0mhap87gmvrs5d3mclx9h-gnused-4.9/sbin:/nix/store/24wz75q6mr0q7p2vnm9mhpgdr5l3y2k0-systemd-256.8/sbin"
+Environment="TZDIR=/nix/store/7a7srac2q5ymc8nab9bhf6rk8ya2l5m6-tzdata-2024b/share/zoneinfo"
+ExecStart=/nix/store/vqv3dblqx76k185jg4ym5i3dz196lv19-nodejs-20.18.1/bin/node /var/www/example.org/auto_build/index.js
+Group=root
+Restart=always
+StandardError=journal
+StandardOutput=journal
+User=root
+WorkingDirectory=/var/www/example.org/auto_build
+
+[Install]
+WantedBy=multi-user.target
