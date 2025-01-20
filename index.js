@@ -3,14 +3,14 @@ const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 5555;
+const port = 9999;
 
 app.use(bodyParser.json());
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/wb', (req, res) => {
+app.post('/wb_opal', (req, res) => {
 	console.log('Received webhook request:', req.body);
 	//console.log('req: ', req);
 
@@ -21,7 +21,7 @@ app.post('/wb', (req, res) => {
 		console.log('Commit:', commitMessage);
 	}
 
-	exec('git config --global --add safe.directory /var/www/example.org/tudeli', (error, stdout, stderr) => {
+	exec('git config --global --add safe.directory /home/opal/front', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return res.status(500).send('Error executing script');
@@ -30,7 +30,7 @@ app.post('/wb', (req, res) => {
 		console.error(`stderr: ${stderr}`);
 	});
 
-	exec('git -C /var/www/example.org/tudeli reset --hard', (error, stdout, stderr) => {
+	exec('git -C /home/opal/front reset --hard', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return res.status(500).send('Error executing script');
@@ -41,7 +41,7 @@ app.post('/wb', (req, res) => {
 
 	console.log('ABOUT TO PULL')
 
-	exec('git -C /var/www/example.org/tudeli pull', (error, stdout, stderr) => {
+	exec('git -C /home/opal/front pull', (error, stdout, stderr) => {
 		if (error) {
 			console.error(`exec error: ${error}`);
 			return res.status(500).send('Error executing script');
@@ -52,7 +52,7 @@ app.post('/wb', (req, res) => {
 
 	setTimeout(() => {
 
-		exec('npm i', { cwd: '/var/www/example.org/tudeli', shell: '/nix/store/4006pcsz94vkxsfv6hqmb36dqd6j6r8x-system-path/bin/bash' }, (error, stdout, stderr) => {
+		exec('npm i', { cwd: '/home/opal/front', shell: '/usr/bin/bash' }, (error, stdout, stderr) => {
 			if (error) {
 				console.error(`exec error: ${error}`);
 				return res.status(500).send('Error executing script');
@@ -64,7 +64,7 @@ app.post('/wb', (req, res) => {
 
 	setTimeout(() => {
 
-		exec('npm run build', { cwd: '/var/www/example.org/tudeli', shell: '/nix/store/4006pcsz94vkxsfv6hqmb36dqd6j6r8x-system-path/bin/bash' }, (error, stdout, stderr) => {
+		exec('npm run build', { cwd: '/home/opal/front', shell: '/usr/bin/bash' }, (error, stdout, stderr) => {
 			if (error) {
 				console.error(`exec error: ${error}`);
 				return res.status(500).send('Error executing script');

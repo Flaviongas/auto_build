@@ -1,0 +1,12 @@
+[Unit]
+Description=OPAL Auto Deployer
+After=network.target
+
+[Service]
+User=root
+Restart=always
+WorkingDirectory=/home/opal/front
+ExecStart= /usr/bin/node /home/opal/deploy_opal/index.js
+
+[Install]
+WantedBy=multi-user.target
